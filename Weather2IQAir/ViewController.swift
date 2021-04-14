@@ -22,33 +22,29 @@ class ViewController: UIViewController {
     
     
     var networkAirManager = NetworkAirManager()
-    var dataCurrentAir = ViewModel()
+   var viewModel = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
-        activityIndicator.color = .black
-        searchCityTextField.delegate = self
-        searchStateTextField.delegate = self
-        dataCurrentAir.defoultCity()
-        if cityLabel.text == "" {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
+//        networkAirManager.delgate = self
+        viewModel.defoultCity()
+        DispatchQueue.main.async {
+            self.cityLabel.text = self.viewModel.model.cityName
+            print(self.viewModel.model.cityName)
         }
         
+//        activityIndicator.isHidden = true
+//        activityIndicator.color = .black
+//        searchCityTextField.delegate = self
+//        searchStateTextField.delegate = self
+//        dataCurrentAir.defoultCity()
+//        if cityLabel.text == "" {
+//            activityIndicator.isHidden = false
+//            activityIndicator.startAnimating()
+//        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.cityLabel.text = self.dataCurrentAir.model.cityName
-            self.countryLabel.text = self.dataCurrentAir.model.countryName
-            self.temperatureLabel.text = self.dataCurrentAir.model.weatherTemString
-            self.windLabel.text = self.dataCurrentAir.model.windSpeed
-            self.aqiusLabel.text = self.dataCurrentAir.model.pollutionAqius
-            if self.cityLabel.text != "" {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
-            self.moreInfoButton.isEnabled = true
-        }
+        
+        
     }
   
     
@@ -56,22 +52,24 @@ class ViewController: UIViewController {
         
         guard let searchState = searchStateTextField.text else {return}
         guard let searchCity = searchCityTextField.text else {return}
-        
+        print(searchCity, searchState)
+//        dataCurrentAir.defoultCity()
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
-        dataCurrentAir.defoultCity(forCity: searchCity, forState: searchState)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.cityLabel.text = self.dataCurrentAir.model.cityName
-            self.countryLabel.text = self.dataCurrentAir.model.countryName
-            self.temperatureLabel.text = self.dataCurrentAir.model.weatherTemString
-            self.windLabel.text = self.dataCurrentAir.model.windSpeed
-            self.aqiusLabel.text = self.dataCurrentAir.model.pollutionAqius
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.presentAlertController(withTitle: "Error", message: self.dataCurrentAir.model.error1, style: .alert)
-        }
+//        dataCurrentAir.defoultCity(forCity: searchCity, forState: searchState)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.cityLabel.text = self.dataCurrentAir.model.cityName
+//            self.countryLabel.text = self.dataCurrentAir.model.countryName
+//            self.temperatureLabel.text = self.dataCurrentAir.model.weatherTemString
+//            self.windLabel.text = self.dataCurrentAir.model.windSpeed
+//            self.aqiusLabel.text = self.dataCurrentAir.model.pollutionAqius
+//            self.activityIndicator.stopAnimating()
+//            self.activityIndicator.isHidden = true
+//        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            if self.dataCurrentAir.model.error1 != "" { self.presentAlertController(withTitle: "Error", message: self.dataCurrentAir.model.error1, style: .alert)
+//            }
+//        }
        
         
     }
@@ -91,4 +89,24 @@ extension ViewController {
         self.present(ac, animated: true, completion: nil)
     }
 }
+//extension ViewController: NetworkAirManagerDelegate {
+//    func updateInterface(_: NetworkAirManager, with currentAir: CurrentAir) {
+//        DispatchQueue.main.async {
+//            self.cityLabel.text = currentAir.cityName
+//            self.countryLabel.text =
+//            self.temperatureLabel.text = self.dataCurrentAir.model.weatherTemString
+//            self.windLabel.text = self.dataCurrentAir.model.windSpeed
+//            self.aqiusLabel.text = self.dataCurrentAir.model.pollutionAqius
+//            if self.cityLabel.text != "" {
+//                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true
+//            }
+//            self.moreInfoButton.isEnabled = true
+//        }
+//    }
+//
+//
+//
+//
+//}
 

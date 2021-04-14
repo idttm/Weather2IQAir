@@ -25,27 +25,27 @@ class MoreInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataCurrentAir.defoultCity()
+//        dataCurrentAir.defoultCity()
         if cityNameLabel.text == "" {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.cityNameLabel.text = self.dataCurrentAir.model.cityName
-            self.stateNameLabel.text = self.dataCurrentAir.model.state
-            self.countryNameLabel.text = self.dataCurrentAir.model.countryName
-            self.temeratureLabel.text = self.dataCurrentAir.model.weatherTemString
-            self.pressureLabel.text = self.dataCurrentAir.model.pressure
-            self.humidityLabel.text = self.dataCurrentAir.model.humidity
-            self.windSpeedLabel.text = self.dataCurrentAir.model.windSpeed
-            self.windDirection.text = self.dataCurrentAir.model.windDirection
-            self.aqinsLabel.text = self.dataCurrentAir.model.pollutionAqius
-            self.aqicnLabel.text = self.dataCurrentAir.model.pollutionAqicn
-            if self.cityNameLabel.text != "" {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.cityNameLabel.text = self.dataCurrentAir.model.cityName
+//            self.stateNameLabel.text = self.dataCurrentAir.model.state
+//            self.countryNameLabel.text = self.dataCurrentAir.model.countryName
+//            self.temeratureLabel.text = self.dataCurrentAir.model.weatherTemString
+//            self.pressureLabel.text = self.dataCurrentAir.model.pressure
+//            self.humidityLabel.text = self.dataCurrentAir.model.humidity
+//            self.windSpeedLabel.text = self.dataCurrentAir.model.windSpeed
+//            self.windDirection.text = self.dataCurrentAir.model.windDirection
+//            self.aqinsLabel.text = self.dataCurrentAir.model.pollutionAqius
+//            self.aqicnLabel.text = self.dataCurrentAir.model.pollutionAqicn
+//            if self.cityNameLabel.text != "" {
+//                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true
+//            }
+//        }
         
        
         

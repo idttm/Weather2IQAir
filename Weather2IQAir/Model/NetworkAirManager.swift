@@ -7,17 +7,23 @@
 
 import Foundation
 
+protocol NetworkAirManagerDelegate {
+    func updateInterface(_: NetworkAirManager, with currentAir: CurrentAir)
+}
+
+
 struct NetworkAirManager {
     
+    var delgate: NetworkAirManagerDelegate?
     
-    func fetchCurrentAir(forCity city: String, forState state: String, completionHandler: @escaping (CurrentAir) -> Void, onFile: @escaping (Error) -> Void) {
+    func fetchCurrentAir(forCity city: String = "Sacramento", forState state: String = "California", onFile: @escaping (Error) -> Void) {
         let urlString = "https://api.airvisual.com/v2/city?city=\(city)&state=\(state)&country=USA&key=\(apiKey)"
         guard let url = URL(string: urlString) else {return}
         let session = URLSession(configuration: .default)
         let task =  session.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let currentAir =  self.parseJSON(withData: data, onFail: onFile) {
-                    completionHandler(currentAir)
+                    self.delgate?.updateInterface(self, with: currentAir)
                 }
             }
         }
