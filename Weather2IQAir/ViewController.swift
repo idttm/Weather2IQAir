@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     
     var networkAirManager = NetworkAirManager()
-   var viewModel = ViewModel()
+    var viewModel = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
